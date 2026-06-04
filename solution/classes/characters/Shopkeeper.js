@@ -17,6 +17,10 @@ export default class Shopkeeper extends Character {
 			{ name: "Magical Shield", price: 20 },
 		];
 	}
+    
+        speak() {
+            return "Buy somethin', will ya!";
+        }
 
 	displayItemsForSale() {
 		log.describeNPC(this.describe());
@@ -27,9 +31,5 @@ export default class Shopkeeper extends Character {
 		});
 		console.log(`[${this.itemsForSale.length + 1}] Sorry, perhaps another time.`);
 		log.divider();
-	}
-
-	speak() {
-		return "Buy somethin', will ya!";
 	}
 }
