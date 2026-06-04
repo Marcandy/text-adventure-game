@@ -30,7 +30,7 @@ You will learn how to plan and execute a more complex application, building your
 1. COPY the link from your new repo on GitHub
 1. CLONE it to your local machine. Example:
 
-`git clone https://github.com/YourUsername/scrabble-scorer-redux`
+`git clone https://github.com/YourUsername/text-adventure-game`
 
 #### Practice in Your Own Branches
 
