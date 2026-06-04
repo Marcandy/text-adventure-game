@@ -9,7 +9,7 @@ export default class Character {
 		this.name = name;
 		this.type = charType;
 		this.desc = description;
-		this.items = itemList; // Can hold strings or item objects
+		this.items = itemList;
 		this.rupees = rupees;
 	}
 
@@ -17,7 +17,7 @@ export default class Character {
 		return `[${this.type.toUpperCase()}] ${this.name}: ${this.desc}`;
 	}
 
-	displayInventory() {
+	getInventory() {
 		if (this.items.length === 0) return `${this.name}'s pack is empty.`;
 		return `${this.name}'s Inventory: ${this.items.join(", ")} | Rupees: ${this.rupees}`;
 	}

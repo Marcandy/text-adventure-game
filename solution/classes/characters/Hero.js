@@ -20,7 +20,7 @@ export default class Hero extends Character {
 
     equipWeapon(weapon) {
         this.weapon = weapon;
-        log.success(`Link equipped the ${weapon}!`);
+        log.success(`Link is now equipped with the ${weapon}!`);
     }
 
     addItemToInventory(item) {
@@ -46,14 +46,17 @@ export default class Hero extends Character {
     getReward() {
         let chance = getRandomInRange(10);
         if (chance >= 9) {
-            this.currentHearts = Math.min(this.maxHearts, this.currentHearts + 1);
-            log.success(`Link found a heart! Health: ${this.currentHearts}/${this.maxHearts}`);
+            this.currentHearts = this.maxHearts;
+            log.success(`🧚 A fairy has fully healed Link! Health: ${this.maxHearts}\n`);
         } else if (chance >= 7) {
+            this.currentHearts = Math.min(this.maxHearts, this.currentHearts + 1);
+            log.success(`💝 Link found a heart! Health: ${this.currentHearts}/${this.maxHearts}\n`);
+        } else if (chance >= 5) {
             this.rupees += 5;
-            log.success(`Link found 5 rupees! Total: ${this.rupees}`);
-        } else if (chance >= 4) {
+            log.success(`💎💎💎💎💎 Link found 5 rupees! Total: ${this.rupees}\n`);
+        } else if (chance >= 3) {
             this.rupees++;
-            log.success(`Link found a rupee! Total: ${this.rupees}`);
+            log.success(`💎 Link found a rupee! Total: ${this.rupees}\n`);
         }
     }
 
@@ -64,13 +67,14 @@ export default class Hero extends Character {
             if (chance < 3) { // 30% hit chance
                 this.currentHearts -= 0.5;
                 hitsTaken++;
-                console.log(`💥 Hit! Link loses 0.5 hearts. (${this.currentHearts} remaining)`);
+                log.hit(`Hit! Link loses 0.5 hearts.`);
+                log.healthStatus(`${this.currentHearts} remaining`);
                 if (this.currentHearts <= 0) {
-                    console.log("💀 GAME OVER. Link has fallen...");
+                    log.alert("\n💀 GAME OVER. Link has fallen...");
                     return false; // Signal death
                 }
             } else {
-                console.log(`💨 Phew! A ${enemyType} missed Link.`);
+                log.miss(`Phew! A ${enemyType} missed Link.`);
             }
         }
         return true; // Still alive
@@ -82,11 +86,11 @@ export default class Hero extends Character {
             return this.dodgeEnemy(enemyType, numEnemies);
         }
 
-        console.log(`⚔️ Link draws his ${this.weapon} and charges into battle!`);
+        console.log(`\nLink draws his ${this.weapon} and charges into battle!`);
         
         // Simulating turn-based resolution cleanly
         while (numEnemies > 0) {
-            console.log(`🗡️ Link defeats a ${enemyType}!`);
+            console.log(`\n🏆 Link defeats a ${enemyType}!`);
             this.getReward();
             numEnemies--;
             

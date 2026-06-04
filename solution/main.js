@@ -20,7 +20,7 @@ function runProgram() {
 		ZeldaDemo.playNextTurn();
 	}
 
-	console.log("\n--- Thanks for playing! ---");
+	console.log("\n----------------------- Thanks for playing! ----------------------\n");
 }
 
 runProgram();

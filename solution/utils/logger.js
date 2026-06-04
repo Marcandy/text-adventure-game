@@ -3,38 +3,67 @@
 import chalk from "chalk";
 
 export const log = {
-    // Lines formed with "="
-    divider: () => {
-        console.log(chalk.gray("=================================================================="));
-    },
+	// Validation warnings / errors / missing items
+	alert: text => {
+		console.log(`\n🚨 WARNING: ${chalk.bold.red(text)}`);
+	},
 
-    // Story text / descriptive atmosphere
-    narrative: (text) => {
-        console.log(chalk.italic.cyan(`\n${text}`));
-    },
+	// Description of NPC preceding dialogue
+	describeNPC: text => {
+		console.log(chalk.dim.cyan(`\n${text}`));
+	},
 
-    // User command requirements / action choices
-    instruction: (text) => {
-        console.log(chalk.bold.bgBlue.white(` 🎮 ACTION REQUIRED `) + " " + chalk.cyan(text));
-    },
+	// Dialogue with NPCs (Old Man / Shopkeeper)
+	dialogue: text => {
+		console.log(chalk.bold.yellow(`\n"${text}"`));
+	},
 
-    // Dialogue with NPCs (Old Man / Shopkeeper)
-    dialogue: (speaker, text) => {
-        console.log(`${chalk.bold.yellow(`🗣️  [${speaker.toUpperCase()}]:`)} ${chalk.yellowBright(`"${text}"`)}`);
-    },
+	// Lines formed with "="
+	divider: () => {
+		console.log(
+			chalk.gray("==================================================================")
+		);
+	},
 
-    // Validation warnings / errors / missing items
-    alert: (text) => {
-        console.log(chalk.bold.red(`🚨 WARNING: ${text}`));
-    },
+	// Lines formed with "=" preceded by blank row
+	dividerTop: () => {
+		console.log(
+			chalk.gray("\n==================================================================")
+		);
+	},
 
-    // Link success events (Rupees, hearts, weapon drops)
-    success: (text) => {
-        console.log(chalk.bold.green(`✨ SUCCESS: ${text}`));
-    },
-    
-    // Status metrics block formatting
-    status: (text) => {
-        console.log(chalk.dim.green(`📊 [STATUS]: ${text}`));
-    }
+	// User input requirements / action choices
+	instruction: text => {
+		console.log(chalk.inverse.bold.white(`\n ACTION REQUIRED: ${text} `));
+	},
+
+	// Story text / descriptive atmosphere
+	narrative: text => {
+		console.log(chalk.italic.cyan(`\n${text}`));
+	},
+
+	// Link gets injured
+	hit: text => {
+		console.log(`\n💥 ${chalk.hex("#ff8c00")(text)}`);
+	},
+
+	// Link dodges an attack
+	miss: text => {
+		console.log(chalk.hex("#7516c9")(`\n${text}`));
+	},
+
+	// Link success events (Rupees, hearts, weapon drops)
+	success: text => {
+		console.log(chalk.bold.green(`\n✨ SUCCESS: ${text}`));
+	},
+
+	// Status metrics for rupees
+	moneyStatus: text => {
+		console.log(`\n💎 ${chalk.dim.green(text)}`);
+	},
+
+	// Status metrics for hearts
+	healthStatus: text => {
+		console.log(`\n❤️‍🩹 ${chalk.dim.hex("#ff8c00")(text)}`);
+	},
 };

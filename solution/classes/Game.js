@@ -22,62 +22,76 @@ export default class Game {
 			{
 				type: "cave",
 				npc: this.oldMan,
-				intro: "Link stands in North Hyrule. He sees a dark cave opening in front of him.",
+				intro: "Link stands in the base of a canyon in Hyrule, surrounded by high, moss-covered walls. He sees three narrow passages leading outward, but is curious about the dark cave opening just in front of him.",
 				prompt: "Would you like Link to enter the cave? (Y/N): ",
 			},
 			{
 				type: "combat",
 				enemyType: "Tektite",
 				count: 4,
-				intro: "Link walks west into a rocky canyon and sees four Tektites hopping around!",
+				intro: "Link takes the western passage and emerges into another open canyon area littered with craggy rocks. Four tektites are hopping around, each looking at him menacingly with its enormous eye!",
 			},
 			{
 				type: "combat",
 				enemyType: "Octorok",
 				count: 4,
-				intro: "Link heads north toward a river. Four Octoroks are spitting rocks at him quickly!",
+				intro: "Link heads north into an area with long, narrow rows of bare rock. As he steps forward, he thinks he sees another cave along the north canyon wall, but four octoroks are racing about, spitting rocks at him!",
 			},
 			{
 				type: "shop",
 				npc: this.shopkeeper,
-				intro: "Behind the river, Link discovers a hidden cave opening with a shop symbol over it.",
+				intro: "Link is standing in front of a cave. It has a shop symbol over the narrow opening.",
 				prompt: "Would you like Link to enter the shop? (Y/N): ",
 			},
 		];
 	}
 
 	displayIntroduction() {
+		log.dividerTop();
+		console.log("          🛡️  THE LEGEND OF ZELDA: HUMBLE BEGINNINGS  🛡️");
 		log.divider();
-		console.log("🛡️  THE LEGEND OF ZELDA: COMPACT ARCHITECTURAL DEMO  🛡️");
-		log.divider();
-		console.log("It's 1986, and the kingdom of Hyrule is in chaos.\n");
-		console.log("The evil prince of darkness, Ganon, has stolen the Triforce of Power");
-		console.log("and is holding Princess Zelda captive in Death Mountain.\n");
+		console.log("\nIt's 1986, and the kingdom of Hyrule is in chaos.\n");
+		console.log("The evil prince of darkness, Ganon, has stolen the Triforce of");
+		console.log("Power and is holding Princess Zelda captive in Death Mountain.\n");
 		console.log("Link, you must grab a sword, defeat his minions, and prepare");
-		console.log("to rescue the Princess! Only then can order be restored to Hyrule.");
+		console.log("to rescue the Princess! Only then can order be restored to Hyrule.\n");
 		log.divider();
 
 		readlineSync.question("\nPress Enter to begin your quest...");
 	}
 
 	handleCombat(enemyType, count) {
-		let choosing = true;
+        let choosing = true;
 		while (choosing) {
-			log.instruction(`Will Link FIGHT or FLEE/DODGE? (FIGHT/DODGE): `);
+			log.instruction(`Will Link FIGHT or RUN?: `);
 			let response = readlineSync.question("").toUpperCase();
 
-			if (response === "FIGHT") {
+			if (response === "FIGHT" || response === "F") {
 				const survived = this.player.fightEnemy(enemyType, count);
 				if (!survived) this.isGameOver = true;
-				choosing = false;
-			} else if (response === "DODGE" || response === "FLEE") {
-				log.narrative(`Link runs through the danger zone, trying to dodge out of the way!`);
+                choosing = false;
+			} else if (response === "RUN" || response === "R") {
+				log.narrative(`💨 Link runs through the danger zone, trying to dodge the attacks!`);
 				const survived = this.player.dodgeEnemy(enemyType, count);
 				if (!survived) this.isGameOver = true;
-				choosing = false;
+                choosing = false;
 			} else {
-				log.alert("Invalid action. Type 'FIGHT' or 'DODGE'.");
+				log.alert("Invalid action. Type 'FIGHT' or 'RUN'.");
 			}
+		}
+	}
+
+	handlePurchase(shopkeeper) {
+		let selection = readlineSync.questionInt("\nChoose an item to purchase: ");
+		while (
+			isNaN(selection) ||
+			selection < 1 ||
+			selection > shopkeeper.itemsForSale.length + 1
+		) {
+			selection = readlineSync.questionInt("\nPlease enter a number: ");
+		}
+		if (selection <= shopkeeper.itemsForSale.length) {
+			this.player.buyItem(shopkeeper.itemsForSale[selection - 1]);
 		}
 	}
 
@@ -91,8 +105,8 @@ export default class Game {
 			log.instruction(encounter.prompt);
 			let choice = readlineSync.question("").toUpperCase();
 			if (choice === "Y") {
-				log.narrative(encounter.npc.describe());
-				log.dialogue(encounter.npc.name, encounter.npc.speak());
+				log.describeNPC(encounter.npc.describe());
+				log.dialogue(encounter.npc.speak());
 				this.player.addItemToInventory("Magical Sword");
 			} else {
 				log.narrative("Link walks past the cave entrance... it feels like a bad idea.");
@@ -103,11 +117,9 @@ export default class Game {
 			log.instruction(encounter.prompt);
 			let choice = readlineSync.question("").toUpperCase();
 			if (choice === "Y") {
-				log.narrative(encounter.npc.describe());
-				encounter.npc.displayItemsForSale();
-
-				log.status(`Link currently has: [${this.player.rupees} Rupees]`);
-				log.dialogue(encounter.npc.name, "PAY ME FOR THE DOOR REPAIR CHARGE!");
+                encounter.npc.displayItemsForSale();
+				log.moneyStatus(`Link currently has ${this.player.rupees} rupees.`);
+				this.handlePurchase(encounter.npc);
 			} else {
 				log.narrative("Link skips the shop and keeps moving.");
 			}
@@ -116,11 +128,11 @@ export default class Game {
 		this.currentStep++;
 
 		if (this.currentStep >= this.encounters.length && !this.isGameOver) {
-			console.log("\n");
-			log.divider();
-			log.success("CONGRATULATIONS! Link survived the wilderness track!");
-			console.log(this.player.displayInventory());
-			log.narrative("With his weapons and coins secure, he's ready for Death Mountain!");
+			log.dividerTop();
+			log.success("CONGRATULATIONS! Link survived his first encounters!\n");
+            if (this.player.items.length > 0 || this.player.rupees > 0) {
+                log.narrative("With his loot secure, he's ready to continue his journey to Death Mountain!");
+            }
 			log.divider();
 			this.isGameOver = true;
 		}
