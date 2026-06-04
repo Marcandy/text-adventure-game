@@ -1,10 +1,10 @@
 /**** GAME CLASS ****/
 
 import readlineSync from "readline-sync";
+import { log } from "../utils/logger.js";
 import Hero from "./characters/Hero.js";
 import OldMan from "./characters/OldMan.js";
 import Shopkeeper from "./characters/Shopkeeper.js";
-import { log } from "../utils/logger.js";
 
 /*
    Spin up a new game and handle interactive gameplay.
