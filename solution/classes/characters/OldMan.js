@@ -18,7 +18,7 @@ export default class OldMan extends Character {
 	speak() {
 		if (!this.hasGivenSword) {
 			this.hasGivenSword = true;
-			return "🔥 IT'S DANGEROUS TO GO ALONE! TAKE THIS.";
+			return "🔥 IT'S DANGEROUS TO GO ALONE! TAKE THIS. 🔥";
 		}
 		return "Master using it and you can have this.";
 	}
