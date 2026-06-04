@@ -3,10 +3,16 @@
 import chalk from "chalk";
 
 export const log = {
-	// Validation warnings / errors / missing items
-	alert: text => {
-		console.log(`\n🚨 WARNING: ${chalk.bold.red(text)}`);
-	},
+    
+    // Title text
+    title: text => {
+        console.log(chalk.bold.green(text));
+    },
+    
+    // Validation warnings / errors / missing items
+    alert: text => {
+        console.log(`\n🚨 WARNING: ${chalk.bold.red(text)}`);
+    },
 
 	// Description of NPC preceding dialogue
 	describeNPC: text => {
@@ -39,7 +45,7 @@ export const log = {
 
 	// Story text / descriptive atmosphere
 	narrative: text => {
-		console.log(chalk.italic.cyan(`\n${text}`));
+		console.log(`\n${chalk.italic.cyan(text)}`);
 	},
 
 	// Link gets injured
@@ -49,7 +55,7 @@ export const log = {
 
 	// Link dodges an attack
 	miss: text => {
-		console.log(chalk.hex("#7516c9")(`\n${text}`));
+		console.log(`\n${chalk.hex("#7516c9")(text)}`);
 	},
 
 	// Link success events (Rupees, hearts, weapon drops)

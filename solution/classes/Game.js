@@ -48,7 +48,7 @@ export default class Game {
 
 	displayIntroduction() {
 		log.dividerTop();
-		console.log("          🛡️  THE LEGEND OF ZELDA: HUMBLE BEGINNINGS  🛡️");
+		log.title("          🛡️  THE LEGEND OF ZELDA: HUMBLE BEGINNINGS  🛡️");
 		log.divider();
 		console.log("\nIt's 1986, and the kingdom of Hyrule is in chaos.\n");
 		console.log("The evil prince of darkness, Ganon, has stolen the Triforce of");

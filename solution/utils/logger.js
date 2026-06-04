@@ -3,6 +3,11 @@
 import chalk from "chalk";
 
 export const log = {
+	// Title text
+	title: text => {
+		console.log(chalk.bold.green(text));
+	},
+    
 	// Validation warnings / errors / missing items
 	alert: text => {
 		console.log(`\n🚨 WARNING: ${chalk.bold.red(text)}`);
