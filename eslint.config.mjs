@@ -4,10 +4,7 @@ import eslintConfigPrettier from "eslint-config-prettier/flat";
 
 export default [
 	{
-		ignores: [
-			"node_modules/**",
-			"local/**",
-		],
+		ignores: ["node_modules/**", "local/**"],
 	},
 	js.configs.recommended,
 	{
