@@ -50,11 +50,12 @@ export default class Game {
 		log.dividerTop();
 		log.title("          🛡️  THE LEGEND OF ZELDA: HUMBLE BEGINNINGS  🛡️");
 		log.divider();
-		console.log("\nIt's 1986, and the kingdom of Hyrule is in chaos.\n");
-		console.log("The evil prince of darkness, Ganon, has stolen the Triforce of");
-		console.log("Power and is holding Princess Zelda captive in Death Mountain.\n");
-		console.log("Link, you must grab a sword, defeat his minions, and prepare");
-		console.log("to rescue the Princess! Only then can order be restored to Hyrule.\n");
+        log.narrative(`It's 1986, and the kingdom of Hyrule is in chaos.
+The evil prince of darkness, Ganon, has stolen the Triforce of
+Power and is holding Princess Zelda captive in Death Mountain.
+Link, you must grab a sword, defeat his minions, and prepare
+to rescue the Princess! Only then can order be restored to Hyrule.
+            `);
 		log.divider();
 
 		readlineSync.question("\nPress Enter to begin your quest...");
