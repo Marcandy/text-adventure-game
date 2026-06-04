@@ -1,9 +1,9 @@
 /**** GAME CLASS ****/
 
 import readlineSync from "readline-sync";
-import Hero from "./Hero.js";
-import OldMan from "./OldMan.js";
-import Shopkeeper from "./Shopkeeper.js";
+import Hero from "./characters/Hero.js";
+import OldMan from "./characters/OldMan.js";
+import Shopkeeper from "./characters/Shopkeeper.js";
 import { log } from "../utils/logger.js";
 
 /*

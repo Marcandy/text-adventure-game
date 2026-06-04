@@ -1,6 +1,6 @@
 /**** MAIN EXECUTION CODE ****/
 
-import Game from "./models/Game.js";
+import Game from "./classes/Game.js";
 
 /*
    This simulation of the opening sequence of the classic 1986 NES game, 
