@@ -1,6 +1,5 @@
 /**** SHOPKEEPER CLASS ****/
 
-import { log } from "../../utils/logger.js";
 import Character from "./Character.js";
 
 /*
@@ -16,5 +15,5 @@ export default class Shopkeeper {
 	// TODO: Override speak()
 
 	// TODO: Define method that displays items for sale
-    
+
 }
