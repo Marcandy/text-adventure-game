@@ -10,10 +10,20 @@ import Character from "./Character.js";
 */
 
 // TODO: Inherit from Character
-export default class OldMan {
+export default class OldMan extends Character {
 
-	// TODO: Define constructor
+   constructor() {
+      super("Old Man", "NPC", "A mysterious elder dwelling inside a dark cave");
+      this.hasGivenSword = false;
+   }
 
-	// TODO: Override speak()
+   speak() {
+      if(!this.hasGivenSword) {
+         this.hasGivenSword = true;
+         return "IT's DANGEROUS TO GO ALONE! TAKE THIS.";
+      }
+
+      return "Master using it and you can take this";
+   }
     
 }
